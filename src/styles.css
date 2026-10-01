@@ -5,7 +5,9 @@
   --text: #14261c;
   --accent: #1f6e46;
   --accent-contrast: #ffffff;
-  --border: #d7ded9;
+  /* 3.6:1 gegen --surface - WCAG 1.4.11 (Non-text Contrast) verlangt >=3:1 für Rahmen, die
+     Eingabefelder/Buttons als solche erkennbar machen; der vorherige Wert (#d7ded9) lag bei ~1.4:1. */
+  --border: #7e8a84;
   --muted: #5b6b62;
 }
 
@@ -16,7 +18,8 @@
     --text: #eef4ef;
     --accent: #4fbf85;
     --accent-contrast: #0b1f14;
-    --border: #2a4635;
+    /* 3.1:1 gegen --surface, gleicher Grund wie oben (vorheriger Wert #2a4635 lag bei ~1.4:1). */
+    --border: #5e7d6a;
     --muted: #a9c2b2;
   }
 }
@@ -148,6 +151,13 @@ ul[role="radiogroup"] {
   align-items: baseline;
   gap: 1rem;
   flex-wrap: wrap;
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .status-area {

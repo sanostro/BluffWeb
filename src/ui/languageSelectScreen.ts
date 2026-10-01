@@ -6,8 +6,14 @@ import { clear, h } from "./dom";
 /**
  * Allererster Bildschirm, vor allem anderen. Jede Sprache steht in sich selbst benannt in der
  * Liste ("Deutsch"/"English"/"Nederlands") - Standardkonvention bei Sprachauswahl, erkennbar
- * unabhängig von der noch nicht getroffenen Wahl. Titel/Buttons bleiben bewusst Deutsch (siehe
- * BluffWeb/CLAUDE.md) statt einer vierten Übersetzungsebene für diesen einmaligen Bildschirm.
+ * unabhängig von der noch nicht getroffenen Wahl. Der Titel bleibt bewusst Deutsch (siehe
+ * BluffWeb/CLAUDE.md) statt einer vierten Übersetzungsebene für diesen einmaligen Bildschirm -
+ * die Aufforderung, überhaupt eine Sprache zu wählen, steht dagegen in allen drei Sprachen da
+ * (lang.languageSelectPrompt je Sprache), sonst versteht sie nur, wer schon Deutsch kann. Jede
+ * dieser Zeilen sowie jeder Listeneintrag trägt ihr eigenes lang-Attribut (WCAG 3.1.2 "Language
+ * of Parts") - sonst liest ein Screenreader "English"/"Nederlands" mit deutscher Aussprache vor,
+ * weil die Dokumentsprache bis zur Auswahl auf "de" steht. Der Button heißt schlicht "Play" statt
+ * einer Übersetzung pro Sprache - das Wort ist in allen drei Sprachen ohnehin verständlich.
  */
 export function renderLanguageSelectScreen(container: HTMLElement, onChosen: (language: Language) => void): void {
   clear(container);
@@ -18,7 +24,11 @@ export function renderLanguageSelectScreen(container: HTMLElement, onChosen: (la
     "ul",
     { role: "radiogroup", "aria-label": "Sprache" },
     allLanguages.map((language, index) =>
-      h("li", {}, [
+      // role="presentation": die <ul> ist durch role="radiogroup" semantisch keine Liste mehr,
+      // ihre <li>-Kinder brauchen daher explizit keine eigene listitem-Rolle mehr (die sonst ins
+      // Leere zeigt, weil der Elternknoten keine Liste/Gruppe im Accessibility-Tree ist) - per
+      // axe-core gefunden ("<li> elements must be contained in a <ul> or <ol>").
+      h("li", { lang: language.id, role: "presentation" }, [
         h("label", { class: "language-option" }, [
           h("input", {
             type: "radio",
@@ -40,7 +50,7 @@ export function renderLanguageSelectScreen(container: HTMLElement, onChosen: (la
     }
   });
 
-  const continueButton = h("button", { type: "button", class: "primary" }, ["Weiter"]);
+  const continueButton = h("button", { type: "button", class: "primary" }, ["Play"]);
   continueButton.addEventListener("click", () => {
     audioEngine.unlock();
     setStoredLanguage(selected);
@@ -50,7 +60,7 @@ export function renderLanguageSelectScreen(container: HTMLElement, onChosen: (la
   container.append(
     h("main", { class: "screen language-screen" }, [
       h("h1", {}, ["Bluff – Sprache wählen"]),
-      h("p", {}, ["Wählen Sie die Sprache des Spiels:"]),
+      ...allLanguages.map((language) => h("p", { lang: language.id }, [language.languageSelectPrompt])),
       list,
       continueButton,
     ]),

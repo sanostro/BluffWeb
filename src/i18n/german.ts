@@ -22,9 +22,7 @@ export const german: Language = {
   playerEliminated: (playerName) => `${playerName} hat keine Würfel mehr und scheidet aus.`,
   gameOverWinner: (winnerName) => `${winnerName} gewinnt das Spiel!`,
 
-  languageSelectTitle: "Bluff – Sprache wählen",
   languageSelectPrompt: "Wählen Sie die Sprache des Spiels:",
-  continueButton: "Weiter",
 
   setupTitle: "Bluff – Neues Spiel",
   yourNameLabel: "Ihr Name",
@@ -157,4 +155,7 @@ export const german: Language = {
         "durchlesbar.",
     },
   ],
+
+  soundOnLabel: "Sound: An",
+  soundOffLabel: "Sound: Aus",
 };

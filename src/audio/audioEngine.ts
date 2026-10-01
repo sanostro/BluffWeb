@@ -1,3 +1,5 @@
+import { isSoundEnabled } from "./soundSettings";
+
 /**
  * Web-Audio-Wiedergabe - TS-Pendant zu Bluff/Sounds/AudioEngine.cs, aber ohne dessen Umweg über
  * einen dedizierten Dispatcher-Thread: der Browser unterstützt echte, gleichzeitige, unabhängig
@@ -16,6 +18,9 @@ class AudioEngine {
   }
 
   async play(url: string, pan = 0): Promise<void> {
+    if (!isSoundEnabled()) {
+      return;
+    }
     try {
       const context = this.ensureContext();
       const buffer = await this.loadBuffer(url);

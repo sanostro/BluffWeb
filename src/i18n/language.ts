@@ -35,9 +35,7 @@ export interface Language {
   gameOverWinner(winnerName: string): string;
 
   // ----- Sprachauswahl -----
-  readonly languageSelectTitle: string;
   readonly languageSelectPrompt: string;
-  readonly continueButton: string;
 
   // ----- Setup -----
   readonly setupTitle: string;
@@ -96,4 +94,8 @@ export interface Language {
   readonly helpButton: string;
   readonly closeButton: string;
   readonly helpChapters: readonly HelpChapter[];
+
+  // ----- Sound-Umschalter -----
+  readonly soundOnLabel: string;
+  readonly soundOffLabel: string;
 }

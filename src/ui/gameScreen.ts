@@ -8,6 +8,7 @@ import { getRandomAiNames } from "../names/aiNames";
 import { soundManager } from "../audio/soundManager";
 import { clear, h } from "./dom";
 import { GameSettings } from "./setupScreen";
+import { createSoundToggleButton } from "./soundToggle";
 
 const HUMAN_INDEX = 0;
 
@@ -47,6 +48,7 @@ export function renderGameScreen(
   const roundHeading = h("h1", {}, [lang.setupTitle]);
   const helpButton = h("button", { type: "button", class: "secondary" }, [lang.helpButton]);
   helpButton.addEventListener("click", onOpenHelp);
+  const soundToggleButton = createSoundToggleButton(lang);
 
   const statusBid = h("dd", { id: "status-bid" }, [""]);
   const statusDice = h("dd", { id: "status-dice" }, [lang.noDiceLeft]);
@@ -118,7 +120,7 @@ export function renderGameScreen(
 
   container.append(
     h("main", { class: "screen game-screen" }, [
-      h("div", { class: "game-header" }, [roundHeading, helpButton]),
+      h("div", { class: "game-header" }, [roundHeading, h("div", { class: "header-actions" }, [soundToggleButton, helpButton])]),
       statusArea,
       livePolite,
       liveAssertive,

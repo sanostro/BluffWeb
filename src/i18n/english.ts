@@ -20,9 +20,7 @@ export const english: Language = {
   playerEliminated: (playerName) => `${playerName} has no dice left and is out.`,
   gameOverWinner: (winnerName) => `${winnerName} wins the game!`,
 
-  languageSelectTitle: "Bluff – Choose a language",
   languageSelectPrompt: "Choose the game's language:",
-  continueButton: "Continue",
 
   setupTitle: "Bluff – New Game",
   yourNameLabel: "Your name",
@@ -149,4 +147,7 @@ export const english: Language = {
         "can be read through at any time.",
     },
   ],
+
+  soundOnLabel: "Sound: On",
+  soundOffLabel: "Sound: Off",
 };

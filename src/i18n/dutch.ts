@@ -21,9 +21,7 @@ export const dutch: Language = {
   playerEliminated: (playerName) => `${playerName} heeft geen dobbelstenen meer en valt af.`,
   gameOverWinner: (winnerName) => `${winnerName} wint het spel!`,
 
-  languageSelectTitle: "Bluff – Kies een taal",
   languageSelectPrompt: "Kies de taal van het spel:",
-  continueButton: "Doorgaan",
 
   setupTitle: "Bluff – Nieuw spel",
   yourNameLabel: "Uw naam",
@@ -153,4 +151,7 @@ export const dutch: Language = {
         "allen tijde na te lezen.",
     },
   ],
+
+  soundOnLabel: "Geluid: Aan",
+  soundOffLabel: "Geluid: Uit",
 };

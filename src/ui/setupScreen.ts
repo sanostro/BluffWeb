@@ -2,6 +2,7 @@ import { audioEngine } from "../audio/audioEngine";
 import { Language } from "../i18n/language";
 import { getNamePoolText, setNamePoolText } from "../names/aiNames";
 import { clear, h } from "./dom";
+import { createSoundToggleButton } from "./soundToggle";
 
 export interface GameSettings {
   readonly playerName: string;
@@ -36,6 +37,8 @@ export function renderSetupScreen(
   const helpButton = h("button", { type: "button", class: "secondary" }, [lang.helpButton]);
   helpButton.addEventListener("click", onOpenHelp);
 
+  const soundToggleButton = createSoundToggleButton(lang);
+
   const startButton = h("button", { type: "button", class: "primary" }, [lang.startButton]);
   startButton.addEventListener("click", () => {
     // Sicherheitsnetz: falls die Sprache bereits gespeichert war, wurde der Sprachauswahl-
@@ -59,7 +62,10 @@ export function renderSetupScreen(
   form.addEventListener("submit", (e) => e.preventDefault());
 
   container.append(
-    h("main", { class: "screen setup-screen" }, [h("div", { class: "game-header" }, [h("h1", {}, [lang.setupTitle]), helpButton]), form]),
+    h("main", { class: "screen setup-screen" }, [
+      h("div", { class: "game-header" }, [h("h1", {}, [lang.setupTitle]), h("div", { class: "header-actions" }, [soundToggleButton, helpButton])]),
+      form,
+    ]),
   );
 
   nameInput.focus();
