@@ -24,3 +24,7 @@ npm run preview   # Produktions-Build lokal ausliefern
 Vanilla TypeScript + [Vite](https://vite.dev/), kein UI-Framework. Als PWA installierbar (Offline-Caching via `vite-plugin-pwa`). Barrierefreiheit beruht ausschließlich auf nativer, semantischer HTML/ARIA-Auszeichnung (echte `<select>`/`<table>`/`<dialog>`-Elemente, `aria-live`-Regionen für Ansagen, Überschriften-Struktur für Sprungmarken-Navigation) statt nachgebauter Steuerelemente.
 
 Weitere Details zu Architektur und Entwurfsentscheidungen stehen in [CLAUDE.md](CLAUDE.md).
+
+## Lizenz
+
+MIT - siehe [LICENSE](LICENSE).
